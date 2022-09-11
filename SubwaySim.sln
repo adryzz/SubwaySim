@@ -1,0 +1,16 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SubwaySim", "SubwaySim\SubwaySim.csproj", "{27C35056-9D27-4B83-9531-A7BE85C87D83}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{27C35056-9D27-4B83-9531-A7BE85C87D83}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{27C35056-9D27-4B83-9531-A7BE85C87D83}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{27C35056-9D27-4B83-9531-A7BE85C87D83}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{27C35056-9D27-4B83-9531-A7BE85C87D83}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
