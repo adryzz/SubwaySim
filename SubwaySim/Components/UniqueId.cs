@@ -14,15 +14,15 @@ namespace SubwaySim.Components
             Id = Unsafe.As<long, ulong>(ref i);
         }
         
-        internal UniqueId(ulong value)
-        {
-            Id = value;
-        }
+        internal UniqueId(ulong value) => Id = value;
 
-        public override string ToString()
-        {
-            return Id.ToString();
-        }
+        public bool Equals(UniqueId other) => Id == other.Id;
+
+        public override bool Equals(object? obj) => obj is UniqueId other && Equals(other);
+
+        public override int GetHashCode() => Id.GetHashCode();
+
+        public override string ToString() => Id.ToString();
 
         public static bool operator ==(UniqueId a, UniqueId b) => a.Id == b.Id;
         
