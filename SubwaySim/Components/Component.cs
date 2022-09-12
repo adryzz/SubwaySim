@@ -11,9 +11,9 @@ namespace SubwaySim.Components
             RegenerateId();
         }
 
-        internal void RegenerateId() => Id = UniqueId.CreateNew();
+        internal void RegenerateId() => Id = new UniqueId();
 
-        public UniqueId Id { get; private set; }
+        public UniqueId Id { get; internal set; }
         
         [JsonIgnore]
         public SubwayEngine Engine { get; }

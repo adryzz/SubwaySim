@@ -7,10 +7,13 @@ static class Program
     public static async Task Main(string[] args)
     {
         Engine = new SubwayEngine();
-        Engine.Tick();
-
-        Engine.Export("subway");
         Engine.Import("subway");
         Engine.Render();
+
+        while (true)
+        {
+            Engine.Tick();
+            Engine.Sleep();
+        }
     }
 }

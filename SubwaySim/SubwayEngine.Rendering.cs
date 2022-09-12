@@ -26,6 +26,11 @@ namespace SubwaySim
                     var second = Stations[pair.Item2];
                     canvas.DrawLine(first.Position.ToSKPoint(), second.Position.ToSKPoint(), line.LineColor.ToSKPaint(LineWidth));
                 }
+                // Draw all the trains
+                foreach (var trainId in line.Trains)
+                {
+                    //var train = Trains[trainId].
+                }
             }
             
             // Draw all the stations
@@ -36,8 +41,6 @@ namespace SubwaySim
                 canvas.DrawText(station.Name, new SKPoint(station.Position.X + StationOuterRadius*1.5f, station.Position.Y + TextSize), SKColors.Black.ToSKPaint(TextSize*2f));
             }
 
-            // Draw all the trains
-            
             // Save
             canvas.Flush();
             FileStream stream = File.OpenWrite("subway.png");

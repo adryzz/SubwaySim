@@ -8,15 +8,15 @@ namespace SubwaySim.Components
     {
         public ulong Id { get; private init; }
 
-        internal static UniqueId FromValue(ulong value)
-        {
-            return new UniqueId { Id = value };
-        }
-        
-        public static UniqueId CreateNew()
+        public UniqueId()
         {
             long i = Random.Shared.NextInt64(long.MinValue, long.MaxValue);
-            return FromValue(Unsafe.As<long, ulong>(ref i));
+            Id = Unsafe.As<long, ulong>(ref i);
+        }
+        
+        internal UniqueId(ulong value)
+        {
+            Id = value;
         }
 
         public override string ToString()
@@ -33,7 +33,7 @@ namespace SubwaySim.Components
     {
         public override UniqueId Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
         {
-            return UniqueId.FromValue(reader.GetUInt64());
+            return new UniqueId(reader.GetUInt64());
         }
 
         public override void Write(Utf8JsonWriter writer, UniqueId value, JsonSerializerOptions options)
@@ -49,7 +49,7 @@ namespace SubwaySim.Components
             var dict = new Dictionary<UniqueId, T>();
             foreach (var v in JsonSerializer.Deserialize<Dictionary<ulong, T>>(ref reader, options) ?? new Dictionary<ulong, T>())
             {
-                dict.Add(UniqueId.FromValue(v.Key), v.Value);
+                dict.Add(new UniqueId(v.Key), v.Value);
             }
             
             return dict;

@@ -21,7 +21,12 @@ namespace SubwaySim
         
         public void Tick()
         {
-
+            
+        }
+        
+        public void Sleep()
+        {
+            Thread.Sleep((int)(100 / TimeScale));
         }
     }
 }
