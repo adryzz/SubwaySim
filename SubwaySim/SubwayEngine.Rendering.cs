@@ -18,18 +18,18 @@ namespace SubwaySim
             SKCanvas canvas = new SKCanvas(bitmap);
             
             // Draw all the lines
-            foreach (var line in _lines.Values)
+            foreach (var line in Lines.Values)
             {
-                foreach (var pair in line.Stations)
+                foreach (var pair in line.Links)
                 {
-                    var first = _stations[pair.Item1];
-                    var second = _stations[pair.Item2];
+                    var first = Stations[pair.Item1];
+                    var second = Stations[pair.Item2];
                     canvas.DrawLine(first.Position.ToSKPoint(), second.Position.ToSKPoint(), line.LineColor.ToSKPaint(LineWidth));
                 }
             }
             
             // Draw all the stations
-            foreach(var station in _stations.Values)
+            foreach(var station in Stations.Values)
             {
                 canvas.DrawCircle(station.Position.ToSKPoint(), StationOuterRadius, SKColors.Black.ToSKPaint());
                 canvas.DrawCircle(station.Position.ToSKPoint(), StationInnerRadius, SKColors.White.ToSKPaint());

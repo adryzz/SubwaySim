@@ -10,7 +10,9 @@ namespace SubwaySim.Components.Basic
 
         public virtual SKColor LineColor { get; init; } = SKColors.Green;
 
-        public virtual List<(ulong, ulong)> Stations { get; } = new List<(ulong, ulong)>();
+        public virtual List<(UniqueId, UniqueId)> Links { get; init; } = new List<(UniqueId, UniqueId)>();
+
+        public virtual List<UniqueId> Trains { get; set; } = new List<UniqueId>();
 
         public enum LineLayout
         {
