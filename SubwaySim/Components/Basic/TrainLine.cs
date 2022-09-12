@@ -1,3 +1,4 @@
+using System.Text.Json.Serialization;
 using SkiaSharp;
 
 namespace SubwaySim.Components.Basic
@@ -9,9 +10,10 @@ namespace SubwaySim.Components.Basic
         public virtual LineStatus Status { get; set; } = LineStatus.Forward;
 
         public virtual SKColor LineColor { get; init; } = SKColors.Green;
-
+        
         public virtual List<(UniqueId, UniqueId)> Links { get; init; } = new List<(UniqueId, UniqueId)>();
 
+        [JsonIgnore]
         public virtual List<UniqueId> Trains { get; set; } = new List<UniqueId>();
 
         public enum LineLayout

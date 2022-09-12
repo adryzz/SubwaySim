@@ -29,12 +29,29 @@ namespace SubwaySim.Components
         public static bool operator !=(UniqueId a, UniqueId b) => a.Id != b.Id;
     }
 
+    public class UniqueIdJsonConverter : JsonConverter<UniqueId>
+    {
+        public override UniqueId Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+        {
+            return UniqueId.FromValue(reader.GetUInt64());
+        }
+
+        public override void Write(Utf8JsonWriter writer, UniqueId value, JsonSerializerOptions options)
+        {
+            writer.WriteRawValue(value.ToString());
+        }
+    }
+
     public class DictionaryUniqueIdJsonConverter<T> : JsonConverter<Dictionary<UniqueId, T>>
     {
         public override Dictionary<UniqueId, T>? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
         {
             var dict = new Dictionary<UniqueId, T>();
-
+            foreach (var v in JsonSerializer.Deserialize<Dictionary<ulong, T>>(ref reader, options) ?? new Dictionary<ulong, T>())
+            {
+                dict.Add(UniqueId.FromValue(v.Key), v.Value);
+            }
+            
             return dict;
         }
 
@@ -44,7 +61,7 @@ namespace SubwaySim.Components
             foreach (var v in value)
             {
                 writer.WritePropertyName(v.Key.ToString());
-                writer.WriteNumberValue(69);
+                JsonSerializer.Serialize(writer, v.Value, options);
             }
             writer.WriteEndObject();
         }
