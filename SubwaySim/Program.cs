@@ -9,5 +9,6 @@ static class Program
         Engine = new SubwayEngine();
         Engine.Tick();
         Engine.Render();
+        Engine.Export("subway");
     }
 }

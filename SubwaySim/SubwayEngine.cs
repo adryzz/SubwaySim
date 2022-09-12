@@ -1,4 +1,5 @@
 using System.Numerics;
+using System.Text.Json.Serialization;
 using SkiaSharp;
 using SubwaySim.Components;
 using SubwaySim.Components.Basic;
@@ -14,20 +15,18 @@ namespace SubwaySim
         
         public uint Height => 4096;
         
-        public IDictionary<UniqueId, TrainLine> Lines { get; protected set; } = new Dictionary<UniqueId, TrainLine>();
+        [JsonConverter(typeof(DictionaryUniqueIdJsonConverter<TrainLine>))]
+        public Dictionary<UniqueId, TrainLine> Lines { get; protected set; } = new Dictionary<UniqueId, TrainLine>();
 
-        public IDictionary<UniqueId, TrainStation> Stations { get; protected set; } = new Dictionary<UniqueId, TrainStation>();
+        [JsonConverter(typeof(DictionaryUniqueIdJsonConverter<TrainStation>))]
+        public Dictionary<UniqueId, TrainStation> Stations { get; protected set; } = new Dictionary<UniqueId, TrainStation>();
 
-        public IDictionary<UniqueId, Train> Trains { get; protected set; } = new Dictionary<UniqueId, Train>();
-
-        public void Import()
-        {
-            
-        }
+        [JsonConverter(typeof(DictionaryUniqueIdJsonConverter<Train>))]
+        public Dictionary<UniqueId, Train> Trains { get; protected set; } = new Dictionary<UniqueId, Train>();
         
         public void Tick()
         {
-            
+
         }
     }
 }
