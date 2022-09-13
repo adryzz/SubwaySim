@@ -8,11 +8,17 @@ namespace SubwaySim.Components
         protected Component()
         {
             Engine = Program.Engine;
-            RegenerateId();
+
+            if (Id == UniqueId.Null)
+            {
+                RegenerateId();
+            }
         }
 
         internal void RegenerateId() => Id = new UniqueId();
 
+        [JsonConverter(typeof(UniqueIdJsonConverter))]
+        [JsonInclude]
         public UniqueId Id { get; internal set; }
         
         [JsonIgnore]

@@ -6,12 +6,13 @@ namespace SubwaySim.Components
 {
     public struct UniqueId
     {
+        public static UniqueId Null { get; } = new UniqueId(0);
         public ulong Id { get; private init; }
 
-        public UniqueId()
+        public UniqueId GenerateNew()
         {
             long i = Random.Shared.NextInt64(long.MinValue, long.MaxValue);
-            Id = Unsafe.As<long, ulong>(ref i);
+            return new UniqueId(Unsafe.As<long, ulong>(ref i));
         }
         
         internal UniqueId(ulong value) => Id = value;
